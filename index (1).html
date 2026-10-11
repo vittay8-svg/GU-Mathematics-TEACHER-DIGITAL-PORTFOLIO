@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GU Mathematics Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{--navy:#101a3c;--blue:#316bff;--purple:#8b5cf6;--cyan:#53d7ff;--ink:#182344;--muted:#7782a5;--glass:rgba(255,255,255,.83);--line:rgba(120,135,190,.19);--shadow:0 18px 55px rgba(31,44,104,.13)}
+    *{box-sizing:border-box}body{margin:0;font-family:'Prompt',sans-serif;color:var(--ink);background:#f3f6ff;min-height:100vh}
+    body:before{content:"";position:fixed;inset:-20%;z-index:-2;background:radial-gradient(circle at 12% 18%,#d9e9ff 0,transparent 28%),radial-gradient(circle at 85% 14%,#e8dcff 0,transparent 30%),radial-gradient(circle at 70% 90%,#d8f8ff 0,transparent 26%);animation:bgshift 14s ease-in-out infinite alternate}
+    @keyframes bgshift{to{filter:hue-rotate(22deg);transform:translate3d(1%,1%,0) scale(1.03)}}
+    .shell{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}.sidebar{background:linear-gradient(165deg,#101a3c,#20245d 60%,#452d83);color:#fff;padding:26px 18px;position:sticky;top:0;height:100vh;overflow:auto}
+    .brand{display:flex;gap:12px;align-items:center;padding:4px 8px 28px}.logo{width:46px;height:46px;border-radius:16px;background:linear-gradient(135deg,#55d8ff,#8770ff,#b25dff);display:grid;place-items:center;font-size:21px;font-weight:700;box-shadow:0 8px 28px #5b67ff66}.brand h1{font-size:15px;margin:0}.brand small{display:block;color:#b9c8ff;font-size:11px;margin-top:3px}
+    .nav-label{font-size:10px;color:#94a6e8;letter-spacing:1.4px;padding:8px 12px}.nav{display:flex;flex-direction:column;gap:7px}.nav button{border:0;color:#d5ddff;background:transparent;border-radius:13px;padding:12px 14px;text-align:left;font:500 13px 'Prompt';cursor:pointer;display:flex;align-items:center;gap:12px;transition:.2s}.nav button:hover,.nav button.active{background:linear-gradient(100deg,#ffffff22,#ffffff0b);color:#fff;box-shadow:inset 3px 0 #77dcff}.nav .ico{font-size:18px;width:22px;text-align:center}.sidebar-foot{margin-top:35px;border:1px solid #ffffff1f;border-radius:16px;padding:15px;background:#ffffff0b;color:#c6d2ff;font-size:11px;line-height:1.7}
+    main{min-width:0;padding:28px clamp(16px,3vw,42px) 50px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:25px}.eyebrow{color:var(--blue);font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase}.topbar h2{margin:4px 0 0;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.5px}.top-actions{display:flex;align-items:center;gap:10px}.year-pill{background:#fff;border:1px solid var(--line);border-radius:99px;padding:9px 14px;font-size:12px;color:#59658b}
+    .btn{border:0;border-radius:12px;padding:11px 16px;font:500 12px 'Prompt';cursor:pointer;transition:.2s}.btn-primary{color:white;background:linear-gradient(120deg,#3475ff,#8c5bfa);box-shadow:0 8px 20px #6375ff36}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 24px #6375ff50}.btn-soft{color:#41517f;background:#edf1ff}.btn-danger{color:#b92e59;background:#fff0f4}.btn:disabled{opacity:.5;cursor:wait}
+    .hero{position:relative;overflow:hidden;border-radius:25px;padding:28px 30px;color:#fff;background:linear-gradient(115deg,#172959 0%,#3449a0 48%,#7852c7 100%);box-shadow:0 20px 45px #263b9b2b;margin-bottom:22px}.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;border:1px solid #ffffff25}.hero:before{width:280px;height:280px;right:-40px;top:-130px;box-shadow:0 0 0 30px #ffffff07,0 0 0 65px #ffffff05}.hero:after{width:170px;height:170px;right:210px;bottom:-125px;background:#6de1ff15}.hero-content{position:relative;z-index:1;max-width:720px}.hero .tag{font-size:10px;letter-spacing:1.3px;color:#c7eaff;background:#ffffff17;padding:6px 10px;border-radius:99px;display:inline-block}.hero h3{font-size:clamp(21px,2.5vw,30px);line-height:1.35;margin:14px 0 8px}.hero p{color:#dce5ff;font-size:12px;line-height:1.8;margin:0;max-width:620px}.hero-actions{display:flex;gap:9px;margin-top:19px;flex-wrap:wrap}.hero .btn-soft{background:#ffffff1c;color:#fff;border:1px solid #ffffff2c}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}.stat,.panel,.profile-card{background:var(--glass);border:1px solid #fff;border-radius:19px;box-shadow:var(--shadow);backdrop-filter:blur(15px)}.stat{padding:18px;position:relative;overflow:hidden}.stat:after{content:"";position:absolute;width:75px;height:75px;right:-24px;bottom:-30px;border-radius:50%;background:linear-gradient(135deg,#5a9dff33,#9a6aff33)}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}.stat-icon{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:#edf2ff;font-size:17px}.stat strong{display:block;font-size:29px;margin-top:12px;line-height:1.2}.stat small{display:block;color:#8a94b3;font-size:10px;margin-top:7px}
+    .grid-main{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:18px}.panel{padding:22px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:17px}.panel h3{font-size:15px;margin:0}.panel p.sub{font-size:11px;color:var(--muted);margin:5px 0 0}.link-btn{border:0;background:none;color:var(--blue);font:500 11px 'Prompt';cursor:pointer}.chart-wrap{height:230px;position:relative}.dim-list{display:grid;gap:16px}.dim-row{display:grid;gap:7px}.dim-head{display:flex;justify-content:space-between;gap:10px;font-size:11px}.dim-head span:first-child{color:#4b587d}.dim-head b{color:#6c70cb}.progress{height:8px;background:#e9edfb;border-radius:99px;overflow:hidden}.progress i{height:100%;display:block;border-radius:99px;background:linear-gradient(90deg,#387dff,#a36aff);transition:width .5s}
+    .section{display:none}.section.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.search{flex:1;min-width:180px;border:1px solid var(--line);background:#ffffffd9;padding:11px 14px;border-radius:12px;font:12px 'Prompt';outline:none}.search:focus,input:focus,textarea:focus,select:focus{border-color:#7a8cff!important;box-shadow:0 0 0 3px #7c83ff18}.filter{border:1px solid var(--line);background:white;padding:10px 12px;border-radius:12px;font:12px 'Prompt';color:#566187}.work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.work-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 8px 25px #3040800a;min-width:0}.work-card .work-top{display:flex;justify-content:space-between;gap:10px}.category{font-size:10px;color:#5d63d4;background:#f0efff;padding:6px 9px;border-radius:8px;display:inline-block}.work-card h4{font-size:14px;margin:13px 0 7px;overflow-wrap:anywhere}.work-card p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 14px;overflow-wrap:anywhere}.work-meta{font-size:10px;color:#9aa3bf}.card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.empty{padding:40px 18px;text-align:center;color:#8993b3;font-size:12px;border:1px dashed #ccd3ed;border-radius:16px;grid-column:1/-1}.empty .emoji{font-size:28px;margin-bottom:8px}
+    .profile-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px}.profile-card{padding:25px;text-align:center}.avatar{width:112px;height:112px;margin:0 auto 14px;border-radius:34px;background:linear-gradient(135deg,#a9dfff,#c5a5ff);display:grid;place-items:center;font-size:38px;color:#fff;overflow:hidden;box-shadow:0 12px 28px #6b7cff30}.avatar img{width:100%;height:100%;object-fit:cover}.profile-card h3{font-size:17px;margin:0 0 4px}.profile-card p{font-size:11px;color:var(--muted);line-height:1.7}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#566187;font-weight:500}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:11px;background:#fff;padding:11px 12px;font:12px 'Prompt';color:var(--ink);outline:none}.field textarea{min-height:90px;resize:vertical}.form-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:17px}
+    .evidence-dim{border:1px solid var(--line);border-radius:16px;padding:17px;background:#fff;margin-bottom:14px}.evidence-dim h4{font-size:13px;margin:0 0 6px}.evidence-dim p{font-size:11px;color:var(--muted);margin:0 0 12px}.evidence-list{display:grid;gap:10px}.evidence-item{border:1px solid #e8ebf7;border-radius:12px;padding:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.evidence-item strong{font-size:12px}.evidence-item small{display:block;color:#8892af;font-size:10px;margin-top:4px}.status{font-size:10px;border-radius:99px;padding:5px 8px;white-space:nowrap;background:#fff4d8;color:#956c13}.status.done{background:#e4f8ee;color:#21845b}
+    .toast{position:fixed;right:22px;bottom:22px;z-index:100;background:#18234c;color:white;padding:13px 17px;border-radius:13px;box-shadow:0 12px 40px #101a3c33;font-size:12px;max-width:min(380px,calc(100vw - 44px));display:none}.toast.show{display:block;animation:fade .2s}.modal-backdrop{position:fixed;inset:0;background:#0e163d80;backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-backdrop.show{display:flex}.modal{background:#f8f9ff;width:min(650px,100%);max-height:92vh;overflow:auto;border-radius:22px;padding:24px;box-shadow:0 30px 90px #11183d55}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h3{margin:0;font-size:18px}.close{border:0;background:#e9edfb;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer}.muted-note{font-size:10px;color:#8b95b4;line-height:1.7;margin-top:12px}
+    @media(max-width:1100px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-main{grid-template-columns:1fr}.profile-layout{grid-template-columns:1fr}.profile-card{display:flex;align-items:center;gap:18px;text-align:left}.profile-card .avatar{margin:0;flex-shrink:0}}
+    @media(max-width:760px){.shell{grid-template-columns:1fr}.sidebar{height:auto;position:relative;padding:12px 14px}.brand{padding:3px 5px 12px}.sidebar-foot,.nav-label{display:none}.nav{flex-direction:row;overflow:auto;padding-bottom:4px}.nav button{white-space:nowrap;padding:10px 12px;font-size:11px}.nav button .ico{font-size:15px;width:auto}.topbar{align-items:flex-start}.top-actions .year-pill{display:none}main{padding:20px 14px 36px}.hero{padding:23px 20px}.stats{gap:10px}.stat{padding:14px}.stat strong{font-size:25px}.work-grid{grid-template-columns:1fr}.panel{padding:17px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.profile-card{padding:18px}.avatar{width:78px;height:78px;border-radius:25px}.profile-card h3{font-size:14px}.top-actions .btn{padding:10px 11px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">GU</div><div><h1>GU Mathematics</h1><small>TEACHER PORTFOLIO</small></div></div>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav">
+      <button class="active" data-page="dashboard"><span class="ico">◈</span>ภาพรวมระบบ</button>
+      <button data-page="works"><span class="ico">▤</span>ผลงานวิชาการ</button>
+      <button data-page="pa"><span class="ico">✧</span>แฟ้มสะสมงาน วPA</button>
+      <button data-page="profile"><span class="ico">◎</span>โปรไฟล์ครู</button>
+    </nav>
+    <div class="sidebar-foot">✦ <b>GU Academic Space</b><br>พื้นที่จัดเก็บผลงานและหลักฐานการพัฒนางานของครูคณิตศาสตร์อย่างเป็นระบบ</div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <div><div class="eyebrow">TEACHER DIGITAL WORKSPACE</div><h2 id="pageTitle">ภาพรวมระบบ</h2></div>
+      <div class="top-actions"><span class="year-pill" id="yearPill">ปีการศึกษา 2569</span><button class="btn btn-primary" onclick="openWorkModal()">＋ เพิ่มผลงาน</button></div>
+    </header>
+
+    <section id="dashboard" class="section active">
+      <div class="hero"><div class="hero-content"><span class="tag">✦ YOUR ACADEMIC JOURNEY</span><h3>ยินดีต้อนรับสู่พื้นที่แห่งการเติบโต<br><span id="welcomeName">แฟ้มสะสมผลงานครูคณิตศาสตร์</span></h3><p>รวมผลงานทางวิชาการ นวัตกรรมการจัดการเรียนรู้ และหลักฐานประกอบการประเมิน วPA ไว้ในพื้นที่เดียว พร้อมค้นหาและต่อยอดได้สะดวก</p><div class="hero-actions"><button class="btn btn-primary" onclick="navigate('works')">ดูผลงานทั้งหมด ↗</button><button class="btn btn-soft" onclick="navigate('pa')">จัดการหลักฐาน วPA</button></div></div></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-top"><span>ผลงานวิชาการ</span><span class="stat-icon">▤</span></div><strong id="statWorks">0</strong><small>รายการในคลังผลงาน</small></div>
+        <div class="stat"><div class="stat-top"><span>หลักฐาน วPA</span><span class="stat-icon">✧</span></div><strong id="statEvidence">0</strong><small>รายการหลักฐานที่บันทึกไว้</small></div>
+        <div class="stat"><div class="stat-top"><span>ไฟล์แนบ</span><span class="stat-icon">↗</span></div><strong id="statFiles">0</strong><small>รายการที่มีลิงก์ไฟล์</small></div>
+        <div class="stat"><div class="stat-top"><span>ความครบถ้วน วPA</span><span class="stat-icon">◉</span></div><strong id="statCompletion">0%</strong><small>คำนวณจากสถานะหลักฐานที่ทำเครื่องหมายเสร็จสมบูรณ์</small></div>
+      </div>
+      <div class="grid-main">
+        <div class="panel"><div class="panel-head"><div><h3>สัดส่วนผลงานตามประเภท</h3><p class="sub">ภาพรวมหมวดหมู่ผลงานที่บันทึกไว้</p></div></div><div class="chart-wrap"><canvas id="workChart"></canvas></div></div>
+        <div class="panel"><div class="panel-head"><div><h3>ความคืบหน้าหลักฐาน วPA</h3><p class="sub">สรุปตามองค์ประกอบทั้ง 3 ด้าน</p></div></div><div class="dim-list" id="dimensionProgress"></div></div>
+      </div>
+    </section>
+
+    <section id="works" class="section">
+      <div class="panel"><div class="panel-head"><div><h3>คลังผลงานทางวิชาการ</h3><p class="sub">จัดเก็บผลงาน สื่อ นวัตกรรม วิจัย และการพัฒนาการเรียนรู้</p></div><button class="btn btn-primary" onclick="openWorkModal()">＋ เพิ่มผลงาน</button></div>
+        <div class="toolbar"><input id="workSearch" class="search" placeholder="ค้นหาชื่อผลงานหรือคำอธิบาย..." oninput="renderWorks()"><select id="workFilter" class="filter" onchange="renderWorks()"><option value="">ทุกประเภท</option><option>แผนการจัดการเรียนรู้</option><option>สื่อและนวัตกรรม</option><option>วิจัยในชั้นเรียน</option><option>ผลงานวิชาการ</option><option>การอบรมและพัฒนา</option><option>อื่น ๆ</option></select></div>
+        <div id="workGrid" class="work-grid"></div>
+      </div>
+    </section>
+
+    <section id="pa" class="section">
+      <div class="panel"><div class="panel-head"><div><h3>แฟ้มสะสมงาน วPA</h3><p class="sub">บันทึกหลักฐานตามองค์ประกอบ 3 ด้าน และติดตามสถานะ</p></div><button class="btn btn-primary" onclick="openEvidenceModal()">＋ เพิ่มหลักฐาน</button></div>
+        <div id="evidenceContainer"></div>
+        <p class="muted-note">หมายเหตุ: หมวดหมู่และสถานะในระบบเป็นเครื่องมือจัดระเบียบเบื้องต้น โปรดตรวจสอบตัวชี้วัดและเกณฑ์ประเมิน วPA ให้ตรงกับหลักเกณฑ์ที่หน่วยงานต้นสังกัดประกาศใช้ในปีนั้น</p>
+      </div>
+    </section>
+
+    <section id="profile" class="section">
+      <div class="profile-layout">
+        <div class="profile-card"><div class="avatar" id="avatarPreview">GU</div><div><h3 id="profileNameDisplay">ครูผู้ดูแลระบบ</h3><p id="profileSubjectDisplay">กลุ่มสาระการเรียนรู้คณิตศาสตร์</p><label class="btn btn-soft" style="display:inline-block;cursor:pointer">เปลี่ยนรูปโปรไฟล์<input type="file" id="photoInput" accept="image/*" hidden onchange="handlePhoto(this)"></label></div></div>
+        <div class="panel"><div class="panel-head"><div><h3>ข้อมูลประจำตัวครู</h3><p class="sub">ข้อมูลนี้จะแสดงในหน้าแรกและบันทึกลง Google Sheets</p></div></div>
+          <form id="profileForm" onsubmit="saveProfileForm(event)"><div class="form-grid">
+            <div class="field"><label>ชื่อ–นามสกุล</label><input id="pName" required placeholder="ระบุชื่อและนามสกุล"></div>
+            <div class="field"><label>ตำแหน่ง</label><input id="pPosition" placeholder="เช่น ครูชำนาญการ"></div>
+            <div class="field"><label>กลุ่มสาระการเรียนรู้</label><input id="pSubject" placeholder="คณิตศาสตร์"></div>
+            <div class="field"><label>โรงเรียน</label><input id="pSchool" placeholder="ชื่อโรงเรียน"></div>
+            <div class="field"><label>ปีการศึกษา</label><input id="pYear" placeholder="2569"></div>
+            <div class="field full"><label>ประวัติหรือคำแนะนำตัว</label><textarea id="pBio" placeholder="แนวทางการจัดการเรียนรู้ ความสนใจ และเป้าหมายการพัฒนา"></textarea></div>
+          </div><div class="form-actions"><button type="submit" class="btn btn-primary">บันทึกข้อมูลโปรไฟล์</button></div></form>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="workModal" class="modal-backdrop" onclick="backdropClose(event,'workModal')"><div class="modal"><div class="modal-head"><h3 id="workModalTitle">เพิ่มผลงานใหม่</h3><button class="close" onclick="closeModal('workModal')">×</button></div>
+<form id="workForm" onsubmit="submitWork(event)"><input type="hidden" id="wId"><div class="form-grid">
+<div class="field full"><label>ชื่อผลงาน *</label><input id="wTitle" required placeholder="ชื่อผลงานหรือโครงการ"></div>
+<div class="field"><label>ประเภทผลงาน</label><select id="wCategory"><option>ผลงานวิชาการ</option><option>แผนการจัดการเรียนรู้</option><option>สื่อและนวัตกรรม</option><option>วิจัยในชั้นเรียน</option><option>การอบรมและพัฒนา</option><option>อื่น ๆ</option></select></div>
+<div class="field"><label>ปีการศึกษา</label><input id="wYear" placeholder="2569"></div>
+<div class="field full"><label>คำอธิบาย</label><textarea id="wDescription" placeholder="วัตถุประสงค์ ผลลัพธ์ หรือรายละเอียดผลงาน"></textarea></div>
+<div class="field full"><label>แนบไฟล์ (ไม่เกิน 10 MB)</label><input id="wFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg,.mp4"><small class="muted-note">หากไม่เลือกไฟล์ใหม่ ระบบจะคงไฟล์เดิมไว้เมื่อแก้ไขรายการ</small></div>
+</div><div class="form-actions"><button type="button" class="btn btn-soft" onclick="closeModal('workModal')">ยกเลิก</button><button id="workSubmit" type="submit" class="btn btn-primary">บันทึกผลงาน</button></div></form></div></div>
+
+<div id="evidenceModal" class="modal-backdrop" onclick="backdropClose(event,'evidenceModal')"><div class="modal"><div class="modal-head"><h3 id="evidenceModalTitle">เพิ่มหลักฐาน วPA</h3><button class="close" onclick="closeModal('evidenceModal')">×</button></div>
+<form id="evidenceForm" onsubmit="submitEvidence(event)"><input type="hidden" id="eId"><div class="form-grid">
+<div class="field full"><label>องค์ประกอบ วPA *</label><select id="eDimension"><option>ด้านที่ 1 การจัดการเรียนรู้</option><option>ด้านที่ 2 การส่งเสริมและสนับสนุนการจัดการเรียนรู้</option><option>ด้านที่ 3 การพัฒนาตนเองและวิชาชีพ</option></select></div>
+<div class="field full"><label>ชื่อตัวชี้วัด / ประเด็น</label><input id="eIndicator" placeholder="ระบุตัวชี้วัดหรือประเด็นที่เกี่ยวข้อง"></div>
+<div class="field full"><label>ชื่อหลักฐาน *</label><input id="eTitle" required placeholder="เช่น แผนการจัดการเรียนรู้ เรื่องจำนวนเต็ม"></div>
+<div class="field full"><label>รายละเอียด</label><textarea id="eDescription" placeholder="อธิบายหลักฐานและผลที่เกิดขึ้น"></textarea></div>
+<div class="field"><label>สถานะ</label><select id="eStatus"><option>กำลังดำเนินการ</option><option>รอตรวจสอบ</option><option>เสร็จสมบูรณ์</option></select></div>
+<div class="field"><label>แนบไฟล์ (ไม่เกิน 10 MB)</label><input id="eFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg,.mp4"></div>
+</div><div class="form-actions"><button type="button" class="btn btn-soft" onclick="closeModal('evidenceModal')">ยกเลิก</button><button id="evidenceSubmit" type="submit" class="btn btn-primary">บันทึกหลักฐาน</button></div></form></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+let state = {profile:{}, works:[], evidence:[], stats:{}, chart:null, photoData:null};
+const PAGE_TITLES = {dashboard:'ภาพรวมระบบ',works:'ผลงานวิชาการ',pa:'แฟ้มสะสมงาน วPA',profile:'โปรไฟล์ครู'};
+document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.page)));
+function navigate(page){
+  document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===page));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+  document.getElementById('pageTitle').textContent=PAGE_TITLES[page]||'GU Mathematics';
+  if(page==='works')renderWorks(); if(page==='pa')renderEvidence();
+}
+function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3400)}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function callServer(name,args,success,fail){
+  if(!google || !google.script || !google.script.run){toast('โปรดเปิดผ่าน URL ของ Google Apps Script Web App');return}
+  let runner=google.script.run.withSuccessHandler(success||(()=>{})).withFailureHandler(err=>{console.error(err);toast(err&&err.message?err.message:'เกิดข้อผิดพลาด');if(fail)fail(err)});
+  runner[name].apply(runner,args||[]);
+}
+function loadData(){
+  callServer('getInitialData',[],data=>{
+    state.profile=data.profile||{};state.works=data.works||[];state.evidence=data.evidence||[];state.stats=data.stats||{};
+    renderAll();
+  });
+}
+function renderAll(){renderProfile();renderDashboard();renderWorks();renderEvidence()}
+function renderProfile(){
+  const p=state.profile;
+  document.getElementById('welcomeName').textContent=p.name||'แฟ้มสะสมผลงานครูคณิตศาสตร์';
+  document.getElementById('yearPill').textContent='ปีการศึกษา '+(p.academicYear||'2569');
+  document.getElementById('profileNameDisplay').textContent=p.name||'ครูผู้ดูแลระบบ';
+  document.getElementById('profileSubjectDisplay').textContent=p.subject||'กลุ่มสาระการเรียนรู้คณิตศาสตร์';
+  const avatar=document.getElementById('avatarPreview');
+  avatar.innerHTML=p.photoUrl?'<img src="'+esc(p.photoUrl)+'" alt="รูปโปรไฟล์">':'GU';
+  ['Name','Position','Subject','School','Year','Bio'].forEach((suffix,i)=>{
+    const key=['name','position','subject','school','academicYear','bio'][i];
+    const el=document.getElementById('p'+suffix);if(el && document.activeElement!==el)el.value=p[key]||'';
+  });
+}
+function renderDashboard(){
+  const s=state.stats||{};
+  document.getElementById('statWorks').textContent=state.works.length;
+  document.getElementById('statEvidence').textContent=state.evidence.length;
+  document.getElementById('statFiles').textContent=s.withFiles||0;
+  const done=state.evidence.filter(e=>e.status==='เสร็จสมบูรณ์').length;
+  document.getElementById('statCompletion').textContent=state.evidence.length?Math.round(done/state.evidence.length*100)+'%':'0%';
+  const cat={};state.works.forEach(w=>{const c=w.category||'ไม่ระบุ';cat[c]=(cat[c]||0)+1});
+  const canvas=document.getElementById('workChart');
+  if(state.chart)state.chart.destroy();
+  state.chart=new Chart(canvas,{type:'doughnut',data:{labels:Object.keys(cat).length?Object.keys(cat):['ยังไม่มีข้อมูล'],datasets:[{data:Object.keys(cat).length?Object.values(cat):[1],backgroundColor:['#4b7cff','#9368f5','#53c8ed','#7f8df9','#b79bff','#63d6bd'],borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:9,boxHeight:9,usePointStyle:true,padding:15,font:{family:'Prompt',size:10}}}}}});
+  const dims=[
+    'ด้านที่ 1 การจัดการเรียนรู้',
+    'ด้านที่ 2 การส่งเสริมและสนับสนุนการจัดการเรียนรู้',
+    'ด้านที่ 3 การพัฒนาตนเองและวิชาชีพ'
+  ];
+  document.getElementById('dimensionProgress').innerHTML=dims.map(name=>{
+    const list=state.evidence.filter(e=>e.dimension===name),complete=list.filter(e=>e.status==='เสร็จสมบูรณ์').length;
+    const pct=list.length?Math.round(complete/list.length*100):0;
+    return '<div class="dim-row"><div class="dim-head"><span>'+esc(name)+'</span><b>'+complete+'/'+list.length+'</b></div><div class="progress"><i style="width:'+pct+'%"></i></div></div>';
+  }).join('');
+}
+function renderWorks(){
+  const q=(document.getElementById('workSearch')?.value||'').toLowerCase(),filter=document.getElementById('workFilter')?.value||'';
+  const items=state.works.filter(w=>(!filter||w.category===filter)&&[w.title,w.description,w.category,w.schoolYear].join(' ').toLowerCase().includes(q));
+  const grid=document.getElementById('workGrid');
+  if(!items.length){grid.innerHTML='<div class="empty"><div class="emoji">✦</div><b>ยังไม่มีผลงานที่ตรงกับการค้นหา</b><br>เริ่มต้นเพิ่มผลงานวิชาการรายการแรกของคุณ</div>';return}
+  grid.innerHTML=items.map(w=>'<article class="work-card"><div class="work-top"><span class="category">'+esc(w.category||'ผลงานวิชาการ')+'</span><span class="work-meta">'+esc(w.schoolYear||'ไม่ระบุปี')+'</span></div><h4>'+esc(w.title)+'</h4><p>'+esc(w.description||'ไม่มีคำอธิบายเพิ่มเติม')+'</p><div class="work-meta">'+(w.fileUrl?'📎 มีไฟล์แนบ':'○ ยังไม่มีไฟล์แนบ')+'</div><div class="card-actions">'+(w.fileUrl?'<button class="btn btn-soft" onclick="openFile(\''+encodeURIComponent(w.fileUrl)+'\')">เปิดไฟล์ ↗</button>':'')+'<button class="btn btn-soft" onclick="editWork(\''+w.id+'\')">แก้ไข</button><button class="btn btn-danger" onclick="removeWork(\''+w.id+'\')">ลบ</button></div></article>').join('');
+}
+function openFile(url){window.open(decodeURIComponent(url),'_blank','noopener')}
+function openWorkModal(item){
+  document.getElementById('workForm').reset();document.getElementById('wId').value=item?item.id:'';
+  document.getElementById('workModalTitle').textContent=item?'แก้ไขผลงาน':'เพิ่มผลงานใหม่';
+  if(item){wTitle.value=item.title||'';wCategory.value=item.category||'ผลงานวิชาการ';wYear.value=item.schoolYear||'';wDescription.value=item.description||''}
+  document.getElementById('workModal').classList.add('show');
+}
+function editWork(id){const item=state.works.find(w=>w.id===id);if(item)openWorkModal(item)}
+function submitWork(event){
+  event.preventDefault();const btn=document.getElementById('workSubmit');btn.disabled=true;btn.textContent='กำลังบันทึก...';
+  const existing=state.works.find(w=>w.id===wId.value);
+  const item={id:wId.value,title:wTitle.value,category:wCategory.value,schoolYear:wYear.value,description:wDescription.value,
+    fileName:existing?.fileName||'',fileUrl:existing?.fileUrl||'',fileId:existing?.fileId||''};
+  const file=document.getElementById('wFile').files[0];
+  uploadThen(file,'work',uploaded=>{
+    if(uploaded)Object.assign(item,uploaded);
+    callServer('saveWork',[item],res=>{state.works=res.works;state.stats=res.stats;closeModal('workModal');renderAll();toast('บันทึกผลงานเรียบร้อย');btn.disabled=false;btn.textContent='บันทึกผลงาน'},()=>{btn.disabled=false;btn.textContent='บันทึกผลงาน'});
+  },()=>{btn.disabled=false;btn.textContent='บันทึกผลงาน'});
+}
+function removeWork(id){if(!confirm('ยืนยันลบรายการผลงานนี้?'))return;callServer('deleteWork',[id],res=>{state.works=res.works;state.stats=res.stats;renderAll();toast('ลบรายการแล้ว')})}
+function renderEvidence(){
+  const dims=[
+    ['ด้านที่ 1 การจัดการเรียนรู้','การออกแบบและจัดการเรียนรู้ การสร้างและพัฒนาสื่อ การวัดผล และผลลัพธ์การเรียนรู้'],
+    ['ด้านที่ 2 การส่งเสริมและสนับสนุนการจัดการเรียนรู้','การจัดทำข้อมูลผู้เรียน การดำเนินงานระบบดูแลช่วยเหลือ และการประสานความร่วมมือ'],
+    ['ด้านที่ 3 การพัฒนาตนเองและวิชาชีพ','การพัฒนาตนเอง การแลกเปลี่ยนเรียนรู้ทางวิชาชีพ และการนำความรู้ไปพัฒนาผู้เรียน']
+  ];
+  document.getElementById('evidenceContainer').innerHTML=dims.map(([name,desc])=>{
+    const items=state.evidence.filter(e=>e.dimension===name);
+    return '<div class="evidence-dim"><h4>'+esc(name)+'</h4><p>'+esc(desc)+'</p><div class="evidence-list">'+(items.length?items.map(e=>'<div class="evidence-item"><div><strong>'+esc(e.title)+'</strong><small>'+esc(e.indicator||e.description||'ไม่มีรายละเอียด')+'</small>'+(e.fileUrl?'<small><a href="'+esc(e.fileUrl)+'" target="_blank" rel="noopener">เปิดไฟล์แนบ ↗</a></small>':'')+'</div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end"><span class="status '+(e.status==='เสร็จสมบูรณ์'?'done':'')+'">'+esc(e.status||'กำลังดำเนินการ')+'</span><button class="btn btn-soft" onclick="editEvidence(\''+e.id+'\')">แก้ไข</button><button class="btn btn-danger" onclick="removeEvidence(\''+e.id+'\')">ลบ</button></div></div>').join(''):'<div class="empty">ยังไม่มีหลักฐานในองค์ประกอบนี้</div>')+'</div></div>';
+  }).join('');
+}
+function openEvidenceModal(item){
+  document.getElementById('evidenceForm').reset();document.getElementById('eId').value=item?item.id:'';
+  document.getElementById('evidenceModalTitle').textContent=item?'แก้ไขหลักฐาน วPA':'เพิ่มหลักฐาน วPA';
+  if(item){eDimension.value=item.dimension||'ด้านที่ 1 การจัดการเรียนรู้';eIndicator.value=item.indicator||'';eTitle.value=item.title||'';eDescription.value=item.description||'';eStatus.value=item.status||'กำลังดำเนินการ'}
+  document.getElementById('evidenceModal').classList.add('show');
+}
+function editEvidence(id){const item=state.evidence.find(e=>e.id===id);if(item)openEvidenceModal(item)}
+function submitEvidence(event){
+  event.preventDefault();const btn=document.getElementById('evidenceSubmit');btn.disabled=true;btn.textContent='กำลังบันทึก...';
+  const existing=state.evidence.find(e=>e.id===eId.value);
+  const item={id:eId.value,dimension:eDimension.value,indicator:eIndicator.value,title:eTitle.value,description:eDescription.value,status:eStatus.value,
+    fileName:existing?.fileName||'',fileUrl:existing?.fileUrl||'',fileId:existing?.fileId||''};
+  uploadThen(document.getElementById('eFile').files[0],'evidence',uploaded=>{
+    if(uploaded)Object.assign(item,uploaded);
+    callServer('saveEvidence',[item],res=>{state.evidence=res.evidence;state.stats=res.stats;closeModal('evidenceModal');renderAll();toast('บันทึกหลักฐานเรียบร้อย');btn.disabled=false;btn.textContent='บันทึกหลักฐาน'},()=>{btn.disabled=false;btn.textContent='บันทึกหลักฐาน'});
+  },()=>{btn.disabled=false;btn.textContent='บันทึกหลักฐาน'});
+}
+function removeEvidence(id){if(!confirm('ยืนยันลบหลักฐานนี้?'))return;callServer('deleteEvidence',[id],res=>{state.evidence=res.evidence;state.stats=res.stats;renderAll();toast('ลบหลักฐานแล้ว')})}
+function uploadThen(file,kind,done,fail){
+  if(!file){done(null);return}
+  if(file.size>10*1024*1024){toast('ไฟล์มีขนาดเกิน 10 MB');if(fail)fail();return}
+  const reader=new FileReader();
+  reader.onload=()=>{const base64=String(reader.result).split(',')[1];callServer('uploadFile',[{name:file.name,mimeType:file.type,dataBase64:base64,kind}],res=>done({fileName:res.fileName,fileUrl:res.fileUrl,fileId:res.fileId}),fail)};
+  reader.onerror=()=>{toast('อ่านไฟล์ไม่สำเร็จ');if(fail)fail()};reader.readAsDataURL(file);
+}
+function saveProfileForm(event){
+  event.preventDefault();const profile={name:pName.value,position:pPosition.value,subject:pSubject.value,school:pSchool.value,academicYear:pYear.value,bio:pBio.value};
+  if(state.profile.photoUrl)profile.photoUrl=state.profile.photoUrl;
+  callServer('saveProfile',[profile],res=>{state.profile=res.profile;renderProfile();toast('บันทึกโปรไฟล์เรียบร้อย')});
+}
+function handlePhoto(input){
+  const file=input.files&&input.files[0];if(!file)return;
+  if(!file.type.startsWith('image/')){toast('โปรดเลือกไฟล์รูปภาพ');return}
+  if(file.size>10*1024*1024){toast('รูปภาพมีขนาดเกิน 10 MB');return}
+  uploadThen(file,'profile',uploaded=>{
+    state.profile.photoUrl=uploaded.fileUrl;
+    const av=document.getElementById('avatarPreview');av.innerHTML='<img src="'+esc(uploaded.fileUrl)+'" alt="รูปโปรไฟล์">';
+    toast('อัปโหลดรูปแล้ว กดบันทึกข้อมูลโปรไฟล์เพื่อยืนยัน');
+  });
+}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+function backdropClose(event,id){if(event.target.id===id)closeModal(id)}
+window.addEventListener('load',loadData);
+</script>
+</body>
+</html>
